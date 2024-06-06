@@ -20,6 +20,10 @@ class AddCustomerForm extends JFrame{
 	
 	JButton addButton;
 	JButton backButton;
+	
+	InvalidNumberInput invalidNumber;
+	InvalidSalaryInput invalidSalary;
+	InvalidBirthdayInput invalidBirthday;
 	AddCustomerForm(){
 		setSize(400,300);
 		setTitle("Add Customer");
@@ -36,6 +40,65 @@ class AddCustomerForm extends JFrame{
 		customerSalary=new JLabel("Salary");
 		customerBirthday=new JLabel("Birthday");
 		
+		
+		
+		addButton=new JButton("Add");
+		backButton=new JButton("Back");
+		JPanel btnPanel=new JPanel();
+		btnPanel.add(addButton);
+		btnPanel.add(backButton);
+		add("North",formName);
+		
+		add("South",btnPanel);
+		
+		ValidateInput validate=new ValidateInput();
+		addButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){				
+			
+			//==================validate phone number===================
+			if(!validate.isValidPhoneNumber(phone.getText())){
+				if(invalidNumber==null){
+					invalidNumber=new InvalidNumberInput();
+					}
+					invalidNumber.setVisible(true);
+				}
+			//=================validate salary===============
+			else if(!validate.isValidSalary(Double.parseDouble(salary.getText()))){
+				if(invalidSalary==null){
+					invalidSalary=new InvalidSalaryInput();
+					}
+					invalidSalary.setVisible(true);
+				}
+			//=================validate birthday==============
+			else if(!validate.isValidBirthday(birthday.getText())){
+				if(invalidBirthday==null){
+					invalidBirthday=new InvalidBirthdayInput();
+					}
+					invalidBirthday.setVisible(true);
+				}
+			else{
+					String custId=id.getText();
+					String custName=name.getText();
+					String custPhone=phone.getText();
+					String custCompany=company.getText();
+					double custSalary=Double.parseDouble(salary.getText());
+					String custBirthday=birthday.getText();
+			
+			
+					Customer c =new Customer(custId,custName,custPhone,custCompany,custSalary,custBirthday);
+					CustomerManagementApp.list.add(c);
+					
+				}
+				}
+			
+			
+		});
+		
+		backButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				AddCustomerForm.this.dispose();
+				}
+			});
 		id=new JTextField(4);
 		name=new JTextField(10);
 		phone=new JTextField(10);
@@ -56,36 +119,6 @@ class AddCustomerForm extends JFrame{
 		formPanel.add(customerBirthday);
 		formPanel.add(birthday);
 		
-		addButton=new JButton("Add");
-		backButton=new JButton("Back");
-		JPanel btnPanel=new JPanel();
-		btnPanel.add(addButton);
-		btnPanel.add(backButton);
-		add("North",formName);
 		add("Center",formPanel);
-		add("South",btnPanel);
-		
-		ValidateInput validate=new ValidateInput();
-		addButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent evt){
-				
-			String custId=id.getText();
-			String custName=name.getText();
-			//==================validate phone number===================
-			while(!validate.isValidPhoneNumber(phone.getText())){
-				
-			}
-			String custPhone=phone.getText();
-			String custCompany=company.getText();
-			double custSalary=Double.parseDouble(salary.getText());
-			String custBirthday=birthday.getText();
-			
-			
-			Customer c =new Customer(custId,custName,custPhone,custCompany,custSalary,custBirthday);
-			CustomerManagementApp.list.add(c);
-				}
-			});
-		
-		
 		}
 	}

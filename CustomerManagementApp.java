@@ -15,6 +15,9 @@ class CustomerManagementApp extends JFrame{
 	private JPanel buttonPanel;
 	
 	private AddCustomerForm addCustomerForm;
+	private ViewCustomer viewCustomer;
+	private SearchCustomerForm searchCustomer;
+	
 //=====================constructor==========================
 	CustomerManagementApp(){
 		setSize(400,300);
@@ -30,15 +33,6 @@ class CustomerManagementApp extends JFrame{
 		buttonPanel=new JPanel(new GridLayout(2,3));
 		addCustomerButton=new JButton("Add Customer");
 		buttonPanel.add(addCustomerButton);
-		
-		addCustomerButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent evt){
-				if(addCustomerForm==null){
-					addCustomerForm=new AddCustomerForm();
-					}
-					addCustomerForm.setVisible(true);
-				}
-			});
 		removeCustomerButton=new JButton("Remove Customer");
 		buttonPanel.add(removeCustomerButton);
 		searchCustomerButton=new JButton("Search");
@@ -50,6 +44,31 @@ class CustomerManagementApp extends JFrame{
 		exitButton=new JButton("Exit");
 		buttonPanel.add(exitButton);
 		add(buttonPanel);
+		
+		addCustomerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				if(addCustomerForm==null){
+					addCustomerForm=new AddCustomerForm();
+					}
+					addCustomerForm.setVisible(true);
+				}
+			});
+		searchCustomerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				if(searchCustomer==null){
+					searchCustomer=new SearchCustomerForm();
+					}
+					searchCustomer.setVisible(true);
+				}
+			});
+		viewCustomerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				if(viewCustomer==null){
+					viewCustomer=new ViewCustomer();
+					}
+					viewCustomer.setVisible(true);
+				}
+			});
 		}
 //========================main method==========================
 	public static void main(String args[]){
