@@ -51,8 +51,9 @@ class CustomerList{
 			temp=temp.next;
 			count++;
 			}
+			if(temp.customer==c){
 			remove(count);
-			
+		}
 		}
 	
 	

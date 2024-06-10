@@ -17,6 +17,8 @@ class CustomerManagementApp extends JFrame{
 	private AddCustomerForm addCustomerForm;
 	private ViewCustomer viewCustomer;
 	private SearchCustomerForm searchCustomer;
+	private RemoveCustomer removeCustomer;
+	private UpdateCustomer updateCustomer;
 	
 //=====================constructor==========================
 	CustomerManagementApp(){
@@ -67,6 +69,29 @@ class CustomerManagementApp extends JFrame{
 					viewCustomer=new ViewCustomer();
 					}
 					viewCustomer.setVisible(true);
+					viewCustomer=null;
+				}
+			});
+			
+		removeCustomerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				if(removeCustomer==null){
+					removeCustomer=new RemoveCustomer();
+					}
+					removeCustomer.setVisible(true);
+				}
+			});
+		updateCustomerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+				if(updateCustomer==null){
+					updateCustomer=new UpdateCustomer();
+					}
+					updateCustomer.setVisible(true);
+				}
+			});
+		exitButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+					System.exit(0);
 				}
 			});
 		}

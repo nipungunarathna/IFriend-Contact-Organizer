@@ -11,6 +11,7 @@ class InvalidBirthdayInput extends JFrame{
 		setTitle("Invalid Birthday Input");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
+		
 		lblTitle=new JLabel("Invalid birthday.. Do you want to add again.");
 		add("Center",lblTitle);
 		btnYES=new JButton("Yes");

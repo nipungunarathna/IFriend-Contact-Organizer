@@ -87,6 +87,7 @@ class AddCustomerForm extends JFrame{
 			
 					Customer c =new Customer(custId,custName,custPhone,custCompany,custSalary,custBirthday);
 					CustomerManagementApp.list.add(c);
+					System.out.println("Customer added successfully");
 					
 				}
 				}
