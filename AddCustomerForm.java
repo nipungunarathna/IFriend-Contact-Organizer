@@ -20,10 +20,21 @@ class AddCustomerForm extends JFrame{
 	
 	JButton addButton;
 	JButton backButton;
+	JButton idGenerateButton;
 	
 	InvalidNumberInput invalidNumber;
 	InvalidSalaryInput invalidSalary;
 	InvalidBirthdayInput invalidBirthday;
+	
+	//============================GENERATE ID=======================
+	private String generateId(){
+		if(CustomerManagementApp.list.size()==0){
+			return "C0001";
+		}
+		String lastId=CustomerManagementApp.list.get(CustomerManagementApp.list.size()-1).getId();
+		int lastNo=Integer.parseInt(lastId.substring(1));
+		return String.format("C%04d",lastNo+1);
+		}	
 	AddCustomerForm(){
 		setSize(400,300);
 		setTitle("Add Customer");
@@ -39,22 +50,30 @@ class AddCustomerForm extends JFrame{
 		customerCompany=new JLabel("Company");
 		customerSalary=new JLabel("Salary");
 		customerBirthday=new JLabel("Birthday");
+	
 		
-		
-		
+	
 		addButton=new JButton("Add");
 		backButton=new JButton("Back");
+		idGenerateButton=new JButton("Generate ID");
 		JPanel btnPanel=new JPanel();
+		btnPanel.add(idGenerateButton);
 		btnPanel.add(addButton);
 		btnPanel.add(backButton);
 		add("North",formName);
 		
 		add("South",btnPanel);
-		
 		ValidateInput validate=new ValidateInput();
+		
+		idGenerateButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evt){
+					id.setText(generateId());	
+					id.setEnabled(false);
+				}
+			});
 		addButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent evt){				
-			
+			public void actionPerformed(ActionEvent evt){
+	
 			//==================validate phone number===================
 			if(!validate.isValidPhoneNumber(phone.getText())){
 				if(invalidNumber==null){
@@ -77,13 +96,15 @@ class AddCustomerForm extends JFrame{
 					invalidBirthday.setVisible(true);
 				}
 			else{
+					
+				
 					String custId=id.getText();
 					String custName=name.getText();
 					String custPhone=phone.getText();
 					String custCompany=company.getText();
 					double custSalary=Double.parseDouble(salary.getText());
 					String custBirthday=birthday.getText();
-			
+					
 			
 					Customer c =new Customer(custId,custName,custPhone,custCompany,custSalary,custBirthday);
 					CustomerManagementApp.list.add(c);

@@ -29,8 +29,9 @@ class CustomerManagementApp extends JFrame{
 		
 		appTitle=new JLabel("IFRIEND Contact Organizer");
 		appTitle.setFont(new Font("",1,25));
-		setLayout(new FlowLayout());
-		add("North",appTitle);
+		JPanel titlePanel=new JPanel();
+		titlePanel.add(appTitle);
+		add("North",titlePanel);
 		
 		buttonPanel=new JPanel(new GridLayout(2,3));
 		addCustomerButton=new JButton("Add Customer");
@@ -45,7 +46,7 @@ class CustomerManagementApp extends JFrame{
 		buttonPanel.add(viewCustomerButton);
 		exitButton=new JButton("Exit");
 		buttonPanel.add(exitButton);
-		add(buttonPanel);
+		add("Center",buttonPanel);
 		
 		addCustomerButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evt){
